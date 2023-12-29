@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "eslint-plugin-prettier": "^5.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -25,10 +26,11 @@
     "lint-staged": "lint"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["airbnb", "prettier", "react-app", "react-app/jest"],
+    "plugins": ["prettier"],
+    "rules": {
+      "prettier/prettier": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -44,6 +46,7 @@
   },
   "devDependencies": {
     "eslint": "^8.56.0",
+    "eslint-config-prettier": "^8.0.0",
     "husky": "^8.0.0",
     "prettier": "^3.1.1"
   }
