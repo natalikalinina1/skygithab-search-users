@@ -2,23 +2,23 @@ import React from 'react';
 import Title from '../components/Title/Title'
 import Search from '../components/Search/Search'
 import Filter from '../components/Filter/Filter'
-import UserList from '../components/Filter/Filter'
+import UserList from '../components/UserForm/UserList'
 import Pagination from '../components/Pagination/Pagination';
-
+import * as S from './MainPage.style'
 
 
 export function MainPage() {
   return (
-    <div>
+    <S.MainConteiner>
       <Title />
       <Search />
 
       <div>
-        <Filter />
-        <UserList />
+        <Filter/>
+        <UserList/>
         <Pagination/>
       </div>
-    </div>
+    </S.MainConteiner>
   );
 }
 
