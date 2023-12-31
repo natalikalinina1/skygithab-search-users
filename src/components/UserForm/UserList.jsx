@@ -1,14 +1,15 @@
 
-import { UserItem } from '../userItem/userItem';
+//import { UserItem } from '../userItem/userItem';
 import React from 'react'
+import * as S from './UserForm.style'
 
 export function UserList() {
 
 
     return(
         <div>
-            <h2>The search results: </h2>
-            <UserItem />
+            <S.Title>The search results: </S.Title>
+          
       
         </div>
 

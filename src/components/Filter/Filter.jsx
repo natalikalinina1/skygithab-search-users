@@ -1,16 +1,15 @@
 
 import React from 'react'
+import * as S from './Filter.style'
 
 export function Filter () {
 
     return(
-        <div >
-            <h3 >Sort by number of repositories:</h3>
-            <input />
-            <label>From largest to smallest</label>    
-            <inpu  />
-            <label>From smallest to largest</label>    
-        </div>
+        <S.FilterContainer>
+        <S.FilterTitle>Sort by number of repositories:</S.FilterTitle>
+       
+        <S.FilterLabel>From smallest to largest</S.FilterLabel>
+      </S.FilterContainer>
 
     )
 }
