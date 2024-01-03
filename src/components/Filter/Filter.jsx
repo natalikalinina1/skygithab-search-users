@@ -10,7 +10,7 @@ export function Filter ({setSort}) {
 
     return(
         <S.FilterWrapper>
-            <S.FilterTitle>Sort by number of repositories:</S.FilterTitle>
+            <S.FilterTitle>Отсортировать по количеству репозиториев:</S.FilterTitle>
             
             <S.FilterLabel htmlFor="desc">От меньшего к большему</S.FilterLabel> 
             <S.FilterRadio

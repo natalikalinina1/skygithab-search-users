@@ -36,10 +36,12 @@ export function UserItem(props) {
         {info === true && (
           <S.UserInfo>
             <S.UserInfoImg src={props.avatar} alt='pic' />
-            <S.UserInfoLink href={props.link}>Ссылка на GITHUB {props.login}</S.UserInfoLink>
+            
+            <S.UserInfoLink href={props.link}>Перейти в профиль GITHUB {props.login}</S.UserInfoLink>
+            <S.UserInfoText>
             <S.UserInfoRepo>Количество репозиториев - <S.UserInfoNum>{repoNumbers}</S.UserInfoNum> </S.UserInfoRepo>
             <S.UserInfoFollowers>Количество подписчиков - <S.UserInfoNum> {followers}</S.UserInfoNum> </S.UserInfoFollowers>
-
+            </S.UserInfoText>
           </S.UserInfo>
         )}
       </S.UserWrapper>

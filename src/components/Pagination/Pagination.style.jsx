@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
  
-export const PaginationContainer = styled.div`
+export const PaginationWrapper = styled.div`
 margin-top: 30px;
 margin-bottom: 30px;
 `;

@@ -4,6 +4,7 @@ export const Form = styled.form`
   width: 100%;
   max-width: 600px;
   position: relative;
+  margin-right:60px;
 `;
 
 export const Input = styled.input`
@@ -23,16 +24,30 @@ export const Input = styled.input`
 export const Button = styled.button`
   position: absolute;
   top: 0;
-  right: 0;
-  width: 67px;
-  height: 42px;
-  border: none;
-  background: transparent;
+  right: 60;
+  width: 60px;
+  height: 56px;
+  border: 4px solid ${({ theme }) => theme.colors.purple} ;
+  background: ${({ theme }) => theme.colors.black};
   border-radius: 0 5px 5px 0;
   cursor: pointer;
+  transition: all 1s;
+
+&.active {
+ padding: 8px;
+ background-color: ${({ theme }) => theme.colors.purple};
+ color: ${({ theme }) => theme.colors.black};
+}
+
+&:hover {
+ transform: scale(1.02);
+ background-color: ${({ theme }) => theme.colors.backgroundThird};
+}
 `;
 
 export const ButtonImg = styled.span`
-  font-size: 16px;
   color: ${({ theme }) => theme.colors.purple};
+  cursor: pointer;
+  
+
 `;
