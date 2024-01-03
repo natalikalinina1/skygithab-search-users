@@ -1,45 +1,51 @@
+
 import styled from 'styled-components';
 
+ 
 export const PaginationContainer = styled.div`
-  margin-top: 30px;
-  margin-bottom: 30px;
+margin-top: 30px;
+margin-bottom: 30px;
 `;
 
 export const PaginationList = styled.ul`
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  list-style-type: none;
-  justify-content: center;
+display: flex;
+flex-direction: row;
+gap: 15px;
+list-style-type: none;
+justify-content: center;
+align-items:center;
 `;
 
 export const PaginationItem = styled.li`
-  border: 1px solid ${({ theme }) => theme.colors.graniteGray};
-  padding: 5px ;
-  color: white;
-  text-align: center;
-  transition: all 1s;
+border: 3px solid ${({ theme }) => theme.colors.purple};
+border-radius: 35%;
+padding: 8px;
+color: ${({ theme }) => theme.colors.white};
+text-align: center;
+box-sizing: content-box;
 
-  &.active {
-    padding: 5px;
-    background-color: white;
-    color: black;
-  }
+transition: all 1s;
 
-  &:hover {
-    transform: scale(1.02);
-    color: black;
-  }
+&.active {
+ padding: 8px;
+ background-color: ${({ theme }) => theme.colors.purple};
+ color: ${({ theme }) => theme.colors.black};
+}
+
+&:hover {
+ transform: scale(1.02);
+ color: ${({ theme }) => theme.colors.purple};
+}
 `;
 
 export const PaginationButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.imgBackGround};
-  border: none;
-  color: black;
-  font-size: 16px;
-  cursor: pointer;
+background-color: ${({ theme }) => theme.colors.black};
+color: ${({ theme }) => theme.colors.white};
+font-size: 20px;
+cursor: pointer;
+border:none;
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.purple};
-  }
+&:hover {
+ color: ${({ theme }) => theme.colors.purple};
+}
 `;

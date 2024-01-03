@@ -8,9 +8,10 @@ export const theme = {
       imgBackGround: '#F0F0F0',
       lightSilver: '#D9D9D9',
       graniteGray: '#5F5F5F',
-      primaryBlue: '#009EE4',
-      hoverBlue: '#0080C1',
       purple: '#8b00ff', 
+      backgroundThird: 'rgb(22, 27, 34)',
+      borderWhite: 'rgba(255, 255, 255, 0.852)',
+      boxShadow: '1px 1px 2px black, 0 0 1em #8b00ff, 0 0 0.2em white',
     },
   };
   
