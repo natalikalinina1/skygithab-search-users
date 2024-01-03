@@ -1,11 +1,11 @@
 
-import MainPage from './page/MainPage'
-
-function App() {
+import Main from "./pages/main.jsx";
+import * as S from './styles/style.jsx'
+export function App() {
   return (
-    <div className="App">
-      <MainPage />
-    </div>
+    <S.Wrapper>
+      <Main />
+    </S.Wrapper>
   );
 }
 
