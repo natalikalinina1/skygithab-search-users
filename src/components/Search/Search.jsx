@@ -22,7 +22,7 @@ export function Search({ setLogin }) {
     
 
     <S.Form data-testid="form" onSubmit={onHandleSubmit}>
-     
+                                                                                                                                                
       <S.Input
         data-testid="input"
         type="search"

@@ -12,7 +12,7 @@ export function Filter ({setSort}) {
     <S.FilterWrapper>
       <S.FilterTitle>Отсортировать по количеству репозиториев:</S.FilterTitle>
             
-      <S.FilterLabel htmlFor="desc">От меньшего к большему</S.FilterLabel> 
+      <S.FilterLabel htmlFor="desc">по возрастанию</S.FilterLabel> 
       <S.FilterRadio
         type='radio'
         name='sort'
@@ -21,7 +21,7 @@ export function Filter ({setSort}) {
         defaultChecked
         onChange={onHandleChange}
       />   
-      <S.FilterLabel htmlFor='asc'>От меньшего к большему</S.FilterLabel> 
+      <S.FilterLabel htmlFor='asc'>по убыванию</S.FilterLabel> 
       <S.FilterRadio
         type='radio'
         name='sort'

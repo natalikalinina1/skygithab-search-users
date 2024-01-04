@@ -3,10 +3,10 @@ import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 
 export function UserItem(props) {
-
   const [repoNumbers, setRepoNumbers] = useState('');
   const [followers, setFollowers] = useState('');
   const [location, setLocation] = useState('');
+  const [created_at, setCreated_at] = useState('');
 
   const getUserRepos = useCallback(async () => {
     console.log(props.login);
@@ -34,37 +34,58 @@ export function UserItem(props) {
       response.data.location === null ? 'не указана' : response.data.location
     );
   }, [props.login]);
+  const getUserTimeRegister = useCallback(async () => {
+    const response = await axios.get(
+      `https://api.github.com/users/${props.login}`
+    );
+    console.log(response.data);
+    setCreated_at(response.data.created_at);
+  }, [props.login]);
 
   const onHandleClick = useCallback(() => {
     getUserRepos();
     getUserFollowers();
     getCountryUser();
-  }, [ getUserFollowers(), getUserRepos(), getCountryUser()]);
+    getUserTimeRegister();
+  }, [
+    getUserFollowers(),
+    getUserRepos(),
+    getCountryUser(),
+    getUserTimeRegister(),
+  ]);
 
   return (
     <S.UserWrapper>
       <S.UserTitle onClick={onHandleClick}>{props.login}</S.UserTitle>
-     
+
       <S.UserInfo>
         <S.UserInfoImg src={props.avatar} alt="pic" />
         <S.UserInfoLink href={props.link}>
-            Перейти в профиль GITHUB {props.login}
+          Перейти в профиль GITHUB {props.login}
         </S.UserInfoLink>
         <S.UserInfoText>
+          <S.UserInfoReg>
+            Дата регистрации-{' '}
+            <S.UserInfoNum>
+              {new Date(created_at).toLocaleString('ru', {
+                year: 'numeric',
+                month: 'long',
+              })}
+            </S.UserInfoNum>{' '}
+          </S.UserInfoReg>
           <S.UserInfoRepo>
-              Количество репозиториев -{' '}
+            Количество репозиториев -{' '}
             <S.UserInfoNum>{repoNumbers}</S.UserInfoNum>{' '}
           </S.UserInfoRepo>
           <S.UserInfoFollowers>
-              Количество подписчиков -{' '}
-            <S.UserInfoNum> {followers}</S.UserInfoNum>{' '}
+            Количество подписчиков - <S.UserInfoNum> {followers}</S.UserInfoNum>{' '}
           </S.UserInfoFollowers>
+
           <S.UserInfoCountry>
-              Страна - <S.UserInfoNum> {location}</S.UserInfoNum>{' '}
+            Страна - <S.UserInfoNum> {location}</S.UserInfoNum>{' '}
           </S.UserInfoCountry>
         </S.UserInfoText>
       </S.UserInfo>
-    
     </S.UserWrapper>
   );
 }
