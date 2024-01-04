@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import { Title } from '../components/Title/Title';
 import { Search } from '../components/Search/Search';
 import { UserResultList } from '../components/UserList/UserResultList';
@@ -20,7 +20,7 @@ export function Main() {
   const [usersPerPage] = useState(12);
   const [sort, setSort] = useState('desc')
 
- useEffect(() => {
+  useEffect(() => {
     const getUserByLogin = async () => {
 
       const response = await axios.get(`https://api.github.com/search/users?q=${login}&per_page=${usersPerPage}&page=${currentPage}&sort=repositories&order=${sort}`);
@@ -43,21 +43,21 @@ export function Main() {
 
   const paginate = page => setCurrentPage(page);
 
-console.log(currentPage);
-console.log(currentUser);
+  console.log(currentPage);
+  console.log(currentUser);
   return (
     <S.MainWrapper>
-        <Title />
-        <Search setLogin={setLogin}/>
-        {loading && <S.Loader></S.Loader>}
-        {users?.length>=1 && 
+      <Title />
+      <Search setLogin={setLogin}/>
+      {loading && <S.Loader></S.Loader>}
+      {users?.length>=1 && 
         <div>
           <Filter setSort={setSort}/>
           
-        <UserResultList data={users}/>
-        <Pagination usersPerPage={usersPerPage} totalUsers={totalUsers} paginate={paginate}/>
+          <UserResultList data={users}/>
+          <Pagination usersPerPage={usersPerPage} totalUsers={totalUsers} paginate={paginate}/>
         </div>
-        }
+      }
       
     </S.MainWrapper>
 

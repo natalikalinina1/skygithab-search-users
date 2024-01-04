@@ -1,6 +1,6 @@
-import { useState } from "react";
-import * as S from "./Pagination.style";
-
+import { useState } from 'react';
+import * as S from './Pagination.style';
+import React from 'react'
 export function Pagination({ usersPerPage, totalUsers, paginate }) {
   console.log(totalUsers);
 
@@ -29,7 +29,7 @@ export function Pagination({ usersPerPage, totalUsers, paginate }) {
             onHandleClick(e);
             paginate(number);
           }}
-          className={currentPage === number ? "active" : ""}
+          className={currentPage === number ? 'active' : ''}
         >
           {number}
         </S.PaginationItem>
