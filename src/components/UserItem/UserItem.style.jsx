@@ -7,7 +7,7 @@ export const UserWrapper = styled.div`
   height: auto;
   border: 1px solid ${({ theme }) => theme.colors.borderWhite};
   border-radius: 15%;
-  padding: 20px 20px;
+  padding: 15px 0px;
   margin-bottom: 12px;
   transition: all 1s;
   box-shadow: ${({ theme }) => theme.colors.boxShadow};
@@ -74,4 +74,9 @@ export const UserInfoText = styled.div`
   padding: 20px;
   line-height: 18px;
   font-size: 18px;
+`;
+export const UserInfoCountry = styled.p`
+  grid-column: 2;
+  height: 30px;
+  color: ${({ theme }) => theme.colors.white};
 `;

@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Title } from '../components/Title/Title';
+import { Header } from '../components/Header/Header';
 import { Search } from '../components/Search/Search';
 import { UserResultList } from '../components/UserList/UserResultList';
 import { Pagination } from '../components/Pagination/Pagination';
 import { Filter } from '../components/Filter/Filter';
 import * as S from './main.style'
+
 
 
 
@@ -47,7 +48,7 @@ export function Main() {
   console.log(currentUser);
   return (
     <S.MainWrapper>
-      <Title />
+      <Header />
       <Search setLogin={setLogin}/>
       {loading && <S.Loader></S.Loader>}
       {users?.length>=1 && 
