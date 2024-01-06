@@ -2,6 +2,7 @@ import * as S from './Search.style';
 import { useState } from 'react';
 import svgImage from '../../assets/images/search.svg';
 import React from 'react';
+import {INVALID_VALUE_MSG,INPUT_PATTERN_REGEXP} from './constants'
 
 export function Search({ setLogin }) {
   const [name, setName] = useState('');
@@ -16,13 +17,15 @@ export function Search({ setLogin }) {
   };
 
   return (
-    <S.Form data-testid="form" onSubmit={onHandleSubmit}>                                                                                                                                          
+    <S.Form data-testid="form" onSubmit={onHandleSubmit}>
       <S.Input
         data-testid="input"
         type="search"
         name="login"
-        placeholder="Введите логин..."
+        placeholder="Введите логин..." 
         onChange={(e) => onHandleChange(e)}
+        title={INVALID_VALUE_MSG} 
+        pattern={INPUT_PATTERN_REGEXP} 
       />
       <S.Button data-testid="button" type="submit">
         <S.ButtonImg>
@@ -30,7 +33,6 @@ export function Search({ setLogin }) {
         </S.ButtonImg>
       </S.Button>
     </S.Form>
-   
   );
 }
 export default Search;

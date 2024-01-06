@@ -10,6 +10,7 @@ export const MainWrapper = styled.div`
   align-items: center;
 `;
 
+
 export const Loader = styled.span`
   width: 48px;
   height: 48px;
@@ -31,7 +32,7 @@ export const Loader = styled.span`
     height: 40px;
     border-radius: 50%;
     border: 3px solid;
-    border-color: turquoise transparent;
+    border-color: purple transparent;
   }
   
   @keyframes rotation {
@@ -42,4 +43,4 @@ export const Loader = styled.span`
       transform: rotate(360deg);
     }
   }
-`;
+}`;

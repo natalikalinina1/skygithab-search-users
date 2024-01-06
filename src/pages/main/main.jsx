@@ -23,7 +23,7 @@ export function Main() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://api.github.com/searchers?q=${login}&per_page=${usersPerPage}&page=${currentPage}&sort=repositories&order=${sort}`
+          `https://api.github.com/search/users?q=${login}&per_page=${usersPerPage}&page=${currentPage}&sort=repositories&order=${sort}`
         );
         console.log(response.data);
         setUsers(response.data.items);
