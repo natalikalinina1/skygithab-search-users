@@ -85,3 +85,16 @@ export const UserInfoReg = styled.p`
   height: 25px;
   color: ${({ theme }) => theme.colors.white};
 `;
+export const ErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  background-color: black;
+`;
+
+export const UserInfoError= styled.p`
+  color: red;
+  font-size: 14px;
+`;

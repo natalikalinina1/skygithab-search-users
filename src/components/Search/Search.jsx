@@ -3,11 +3,9 @@ import { useState } from 'react';
 import svgImage from '../../assets/images/search.svg';
 import React from 'react';
 
-
 export function Search({ setLogin }) {
   const [name, setName] = useState('');
 
- 
   function onHandleChange(e) {
     setName(e.target.value);
   }
@@ -18,11 +16,7 @@ export function Search({ setLogin }) {
   };
 
   return (
-
-    
-
-    <S.Form data-testid="form" onSubmit={onHandleSubmit}>
-                                                                                                                                                
+    <S.Form data-testid="form" onSubmit={onHandleSubmit}>                                                                                                                                          
       <S.Input
         data-testid="input"
         type="search"
