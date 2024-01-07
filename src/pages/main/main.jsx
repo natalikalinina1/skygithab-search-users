@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Header } from '../../components/Header/Header';
@@ -7,6 +8,8 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { Filter } from '../../components/Filter/Filter';
 import * as S from '../main/main.style';
 import { ErrorNotFound } from '../errorNotFound/errorNotFound';
+//import Skeleton from 'react-loading-skeleton';
+import { Skeleton } from '../../components/Skeletons/Skeleton';
 
 export function Main() {
   const [login, setLogin] = useState('');
@@ -67,10 +70,10 @@ export function Main() {
     <S.MainWrapper>
       <Header />
       <Search setLogin={setLogin} setError={setError} />
-      {loading && <S.Loader></S.Loader>}
       {users?.length >= 1 && (
         <div>
           <Filter setSort={setSort} />
+          {loading && <Skeleton/>}
           <UserResultList data={users} />
           <Pagination
             usersPerPage={usersPerPage}

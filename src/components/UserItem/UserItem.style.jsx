@@ -27,14 +27,16 @@ export const UserTitle = styled.h3`
   letter-spacing: 1.1px;
   line-height: 18px;
   font-size: 26px;
+  padding:10px;
 `;
 
 export const UserInfo = styled.div`
-  padding-top: 10px;
+  padding-top: 5px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   justify-items: center;
   font-size: 18px;
+  padding-bottom: 8px;
 `;
 
 export const UserInfoImg = styled.img`
