@@ -1,7 +1,7 @@
 import * as S from './UserItem.style';
-import React, {useCallback, useEffect } from 'react';
-import api from '../../api'
-import { setUserData, setInfo, setErrorMsg, addToCache, clearCache,selectUserItem  } from '../../Slices/userItemSlice';
+import React, { useCallback, useEffect } from 'react';
+import api from '../../api';
+import { setUserData, setInfo, setErrorMsg, addToCache, clearCache, selectUserItem } from '../../Slices/userItemSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export function UserItem(props) {
@@ -13,7 +13,7 @@ export function UserItem(props) {
       dispatch(setUserData(cache[login]));
     } else {
       try {
-        const response = await api.get(`/users/${login}`);
+        const response = await api.get(`/users/${login}`); // Помещаем путь в кавычки
         const userData = {
           repoNumbers: response.data.public_repos,
           followers: response.data.followers,
@@ -30,20 +30,22 @@ export function UserItem(props) {
 
   const onHandleClick = useCallback(() => {
     dispatch(setErrorMsg(''));
-    getUserData(props.login);
-    dispatch(setInfo(!info));
+    if (info) {
+      dispatch(setInfo(false)); // Скрываем информацию, если уже отображена
+    } else {
+      getUserData(props.login);
+      dispatch(setInfo(true)); // Показываем информацию
+    }
   }, [dispatch, getUserData, info, props.login]);
 
   useEffect(() => {
-    return () => {
-      dispatch(clearCache());
-    };
+    dispatch(clearCache(props.login)); // Передаем login в clearCache
   }, [dispatch, props.login]);
 
   return (
     <S.UserWrapper>
       <S.UserTitle onClick={onHandleClick}>{props.login}</S.UserTitle>
-      {info && (
+      {info && (props.login === userData.login) && (
         <S.UserInfo>
           <S.UserInfoImg src={props.avatar} alt="pic" />
           <S.UserInfoLink href={props.link}>
