@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 
 export function App() {
   const [error, setError] = useState(false);
-
+ 
   return (
     <S.Wrapper>
       {error ? <ErrorNotFound /> : <Main setError={setError} />}

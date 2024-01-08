@@ -1,118 +1,76 @@
 import * as S from './UserItem.style';
-import React, { useState, useCallback } from 'react';
-import axios from 'axios';
+import React, {useCallback, useEffect } from 'react';
+import api from '../../api'
+import { setUserData, setInfo, setErrorMsg, addToCache, clearCache,selectUserItem  } from '../../Slices/userItemSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export function UserItem(props) {
-  
-  const [repoNumbers, setRepoNumbers] = useState('');
-  const [followers, setFollowers] = useState('');
-  const [location, setLocation] = useState('');
-  const [created_at, setCreated_at] = useState('');
-  const [info, setInfo] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const dispatch = useDispatch();
+  const { userData, info, errorMsg, cache } = useSelector(selectUserItem);
 
-  const getUserRepos = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `https://api.github.com/users/${props.login}`
-      );
-  
-      setRepoNumbers(response.data.public_repos);
-    } catch (error) {
-      setErrorMsg('Ошибка получения информации о репозиториях');
+  const getUserData = useCallback(async (login) => {
+    if (cache[login]) {
+      dispatch(setUserData(cache[login]));
+    } else {
+      try {
+        const response = await api.get(`/users/${login}`);
+        const userData = {
+          repoNumbers: response.data.public_repos,
+          followers: response.data.followers,
+          location: response.data.location === null ? 'не указана' : response.data.location,
+          created_at: response.data.created_at,
+        };
+        dispatch(setUserData(userData));
+        dispatch(addToCache({ login, userData })); // Сохраняем данные в кэш
+      } catch (error) {
+        dispatch(setErrorMsg('Ошибка получения информации'));
+      }
     }
-  }, [props.login]);
-
-  const getUserFollowers = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `https://api.github.com/users/${props.login}`
-      );
-  
-      setFollowers(response.data.followers);
-    } catch (error) {
-      setErrorMsg('Ошибка получения подписчиков');
-    }
-  }, [props.login]);
-
-  const getCountryUser = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `https://api.github.com/users/${props.login}`
-      );
-
-      setLocation(
-        response.data.location === null ? 'не указана' : response.data.location
-      );
-    } catch (error) {
-      setErrorMsg('Ошибка получения информации о стране');
-    }
-  }, [props.login]);
-
-  const getUserTimeRegister = useCallback(async () => {
-    try {
-      const response = await axios.get(
-        `https://api.github.com/users/${props.login}`
-      );
-   
-      setCreated_at(response.data.created_at);
-    } catch (error) {
-      setErrorMsg('Ошибка получения информации о дате регистрации');
-    }
-  }, [props.login]);
+  }, [cache, dispatch]);
 
   const onHandleClick = useCallback(() => {
-    setErrorMsg('');
-    getUserRepos();
-    getUserFollowers();
-    getCountryUser();
-    getUserTimeRegister();
-    if (info === true) {
-      setInfo(false);
-      return;
-    }
-    setInfo(true);
-  }, [ info, getUserFollowers(),
-    getUserRepos(),
-    getCountryUser(),
-    getUserTimeRegister(),
-  ]);
+    dispatch(setErrorMsg(''));
+    getUserData(props.login);
+    dispatch(setInfo(!info));
+  }, [dispatch, getUserData, info, props.login]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCache());
+    };
+  }, [dispatch, props.login]);
 
   return (
     <S.UserWrapper>
       <S.UserTitle onClick={onHandleClick}>{props.login}</S.UserTitle>
-      {info === true && (
+      {info && (
         <S.UserInfo>
           <S.UserInfoImg src={props.avatar} alt="pic" />
           <S.UserInfoLink href={props.link}>
-          Перейти в профиль GITHUB {props.login}
+            Перейти в профиль GITHUB {props.login}
           </S.UserInfoLink>
           <S.UserInfoText>
-            {errorMsg && (
-              <S.UserInfoError>
-                {errorMsg}
-              </S.UserInfoError>
-            )}
+            {errorMsg && <S.UserInfoError>{errorMsg}</S.UserInfoError>}
             {!errorMsg && (
               <>
                 <S.UserInfoReg>
                   Дата регистрации-{' '}
                   <S.UserInfoNum>
-                    {new Date(created_at).toLocaleString('ru', {
+                    {new Date(userData.created_at).toLocaleString('ru', {
                       year: 'numeric',
-                      month: 'long',
+                      month: 'long'
                     })}
                   </S.UserInfoNum>{' '}
                 </S.UserInfoReg>
                 <S.UserInfoRepo>
                   Количество репозиториев -{' '}
-                  <S.UserInfoNum>{repoNumbers}</S.UserInfoNum>{' '}
+                  <S.UserInfoNum>{userData.repoNumbers}</S.UserInfoNum>{' '}
                 </S.UserInfoRepo>
                 <S.UserInfoFollowers>
-                  Количество подписчиков - <S.UserInfoNum> {followers}</S.UserInfoNum>{' '}
+                  Количество подписчиков - <S.UserInfoNum>{userData.followers}</S.UserInfoNum>{' '}
                 </S.UserInfoFollowers>
                 <S.UserInfoCountry>
-                  Страна - <S.UserInfoNum> {location}</S.UserInfoNum>{' '}
+                  Страна - <S.UserInfoNum>{userData.location}</S.UserInfoNum>{' '}
                 </S.UserInfoCountry>
               </>
             )}
