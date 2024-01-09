@@ -7,7 +7,7 @@ export const usersSlice = createSlice({
     users: [],
     loading: false,
     currentPage: 1,
-    totalUsers: '',
+    totalUsers: 0,
     usersPerPage: 12,
     sort: 'desc',
     error: '',
@@ -49,6 +49,7 @@ export const {
   setUsersPerPage,
   setSort,
   setError,
+  setLoginNotFound,
 } = usersSlice.actions;
 
 export const selectUsers = (state) => state.users;

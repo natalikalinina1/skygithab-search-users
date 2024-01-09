@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentPage } from '../../Slices/userSlice';
 import * as S from './Pagination.style';
@@ -7,6 +7,7 @@ export function Pagination({ usersPerPage, totalUsers, paginate }) {
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(7);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const [pageNumberLimit] = useState(7);
+
   const dispatch = useDispatch();
   const { currentPage } = useSelector((state) => state.users);
   const pages = [];
@@ -15,53 +16,47 @@ export function Pagination({ usersPerPage, totalUsers, paginate }) {
     pages.push(i);
   }
 
-  const onHandleClick = useCallback((number) => {
-    dispatch(setCurrentPage(number)); // Изменяем текущую страницу через действие setCurrentPage
+  const handlePageClick = useCallback((number) => {
+    dispatch(setCurrentPage(number));
     paginate(number);
   }, [dispatch, paginate]);
 
-  const renderPageNumbers = pages.map((number) => {
-    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
-      return (
-        <S.PaginationItem
-          key={number}
-          onClick={() => onHandleClick(number)}
-          className={currentPage === number ? 'active' : ''}
-        >
-          {number}
-        </S.PaginationItem>
-      );
-    } else {
-      return null;
+  useEffect(() => {
+    if (currentPage > maxPageNumberLimit) {
+      setMinPageNumberLimit(currentPage - pageNumberLimit);  
+      setMaxPageNumberLimit(currentPage);  
+    } else if(currentPage <= minPageNumberLimit){  
+      setMaxPageNumberLimit(currentPage + pageNumberLimit);  
+      setMinPageNumberLimit(currentPage - 1);  
     }
-  });
+  }, [currentPage, maxPageNumberLimit, pageNumberLimit, minPageNumberLimit]);
 
-  const onHandleNextButton = useCallback(() => {
-    if (currentPage + 1 > maxPageNumberLimit) {
-      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+  const handleNextButton = () => {
+    if (maxPageNumberLimit + 1 <= pages.length) {
+      setMaxPageNumberLimit(maxPageNumberLimit + 1);
+      setMinPageNumberLimit(minPageNumberLimit + 1);
+      dispatch(setCurrentPage(currentPage + 1));
+      paginate(currentPage + 1);
     }
-    setCurrentPage(currentPage + 1);
-    paginate(currentPage + 1);
-  }, [currentPage, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit, paginate]);
+  };
 
-  const onHandlePrevButton = useCallback(() => {
-    if ((currentPage - 1) % pageNumberLimit === 0) {
-      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+  const handlePrevButton = () => {
+    if (currentPage > 1) {  
+      setMaxPageNumberLimit(currentPage - 1);  
+      setMinPageNumberLimit((currentPage - 1) - pageNumberLimit); 
+      dispatch(setCurrentPage(currentPage - 1));
+      paginate(currentPage - 1);
     }
-    setCurrentPage(currentPage - 1);
-    paginate(currentPage - 1);
-  }, [currentPage, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit, paginate]);
+  };
 
   let pageIncrementBtn = null;
   if (pages.length > maxPageNumberLimit) {
-    pageIncrementBtn = <S.PaginationItem onClick={onHandleNextButton}> &hellip; </S.PaginationItem>;
+    pageIncrementBtn = <S.PaginationItem onClick={handleNextButton}>&hellip;</S.PaginationItem>;
   }
 
   let pageDecrementBtn = null;
   if (minPageNumberLimit >= 1) {
-    pageDecrementBtn = <S.PaginationItem onClick={onHandlePrevButton}> &hellip; </S.PaginationItem>;
+    pageDecrementBtn = <S.PaginationItem onClick={handlePrevButton}>&hellip;</S.PaginationItem>;
   }
 
   return (
@@ -69,21 +64,35 @@ export function Pagination({ usersPerPage, totalUsers, paginate }) {
       <S.PaginationList>
         <S.PaginationItem>
           <S.PaginationButton
-            onClick={onHandlePrevButton}
-            disabled={currentPage === pages[0] ? true : false}
-            className={currentPage === pages[0] ? 'active' : ''}
+            onClick={handlePrevButton}
+            disabled={currentPage === 1}
+            className={currentPage === 1 ? 'active' : ''}
           >
             Предыдущая
           </S.PaginationButton>
         </S.PaginationItem>
         {pageDecrementBtn}
-        {renderPageNumbers}
+        {pages.map((number) => {
+          if (number <= maxPageNumberLimit && number > minPageNumberLimit) {
+            return (
+              <S.PaginationItem
+                key={number}
+                onClick={() => handlePageClick(number)}
+                className={currentPage === number ? 'active' : ''}
+              >
+                {number}
+              </S.PaginationItem>
+            );
+          } else {
+            return null;
+          }
+        })}
         {pageIncrementBtn}
         <S.PaginationItem>
           <S.PaginationButton
-            onClick={onHandleNextButton}
-            disabled={currentPage === pages[pages.length - 1] ? true : false}
-            className={currentPage === pages[pages.length - 1] ? 'active' : ''}
+            onClick={handleNextButton}
+            disabled={currentPage === pages.length}
+            className={currentPage === pages.length ? 'active' : ''}
           >
             Следующая
           </S.PaginationButton>
@@ -92,3 +101,4 @@ export function Pagination({ usersPerPage, totalUsers, paginate }) {
     </S.PaginationWrapper>
   );
 }
+export default Pagination

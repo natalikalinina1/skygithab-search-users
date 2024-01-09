@@ -36,3 +36,4 @@ export function Filter() {
     </S.FilterWrapper>
   );
 }
+export default Filter

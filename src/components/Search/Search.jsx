@@ -4,6 +4,7 @@ import svgImage from '../../assets/images/search.svg';
 import React from 'react';
 import {INVALID_VALUE_MSG,INPUT_PATTERN_REGEXP} from './constants'
 
+
 export function Search({ setLogin }) {
   const [name, setName] = useState('');
 

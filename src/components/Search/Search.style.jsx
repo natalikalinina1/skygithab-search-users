@@ -5,6 +5,10 @@ export const Form = styled.form`
   max-width: 600px;
   position: relative;
   margin-right:60px;
+  @media (max-width: 600px) {
+    max-width: none;
+    margin-right: 0;
+  }
 `;
 
 export const Input = styled.input`
@@ -12,13 +16,16 @@ export const Input = styled.input`
   height: 56px;
   border-radius: 20px;
   padding: 10px 15px;
-  border: 5px solid ${({ theme }) => theme.colors.purple};
+  border: 5px solid #8b00ff;
   border-radius: 5px;
-  outline: none;
-  background: ${({ theme }) => theme.colors.backgroundThird};
-  color: ${({ theme }) => theme.colors.white};
+  outline:none;
+  background:rgb(22, 27, 34) ;
+  color: white;
   font-size: 18px;
-  box-shadow:${({ theme }) => theme.colors.boxShadow}
+  box-shadow:1px 1px 2px black, 0 0 1em #8b00ff, 0 0 0.2em white;
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 
 export const Button = styled.button`
@@ -27,27 +34,33 @@ export const Button = styled.button`
   right: 60;
   width: 60px;
   height: 56px;
-  border: 4px solid ${({ theme }) => theme.colors.purple} ;
-  background: ${({ theme }) => theme.colors.black};
+  border: 4px solid #8b00ff ;
+  background: #000000;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   transition: all 1s;
+  @media (max-width: 674px) {
+    position: relative;
+    margin-top:-56px;
+    float: right;
 
+  }
 &.active {
  padding: 8px;
- background-color: ${({ theme }) => theme.colors.purple};
- color: ${({ theme }) => theme.colors.black};
+ background-color:#8b00ff;
+ color: #000000; 
 }
 
 &:hover {
  transform: scale(1.02);
- background-color: ${({ theme }) => theme.colors.backgroundThird};
+ background-color: rgb(22, 27, 34);
 }
+
 `;
 
 export const ButtonImg = styled.span`
-  color: ${({ theme }) => theme.colors.purple};
+  color:#8b00ff ;
   cursor: pointer;
   
-
+ 
 `;

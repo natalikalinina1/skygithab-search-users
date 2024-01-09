@@ -7,6 +7,11 @@ export const HeaderWrapper = styled.div`
   margin-top: 50px;
   margin-bottom: 40px;
   gap: 16px;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    gap: 4px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -15,6 +20,10 @@ export const Title = styled.h1`
   text-align: center;
   text-shadow: ${({ theme }) => theme.colors.boxShadow};
   margin-top: 50px;
+  @media (max-width: 768px) {
+    font-size: 28px;
+    margin-top: 10px;
+  }
 `;
 
 export const SVGWrapper = styled.span`
@@ -23,4 +32,5 @@ export const SVGWrapper = styled.span`
   color: inherit;
   margin-left: -15px;
   cursor: pointer;
+  
 `;
