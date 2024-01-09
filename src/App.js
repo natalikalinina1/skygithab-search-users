@@ -1,10 +1,14 @@
+import Main from './pages/main/main.jsx';
+import ErrorNotFound from './pages/errorNotFound/errorNotFound.jsx';
+import * as S from './styles/style.jsx';
+import React, { useState } from 'react';
 
-import Main from "./pages/main.jsx";
-import * as S from './styles/style.jsx'
 export function App() {
+  const [error, setError] = useState(false);
+ 
   return (
     <S.Wrapper>
-      <Main />
+      {error ? <ErrorNotFound /> : <Main setError={setError} />}
     </S.Wrapper>
   );
 }

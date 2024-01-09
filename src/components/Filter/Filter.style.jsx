@@ -17,7 +17,6 @@ export const FilterTitle = styled.h3`
 `;
 
 export const FilterRadio = styled.input`
-  
     appearance: none;
     width: 16px;
     height: 16px;

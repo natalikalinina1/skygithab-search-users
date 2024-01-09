@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 `;
 export default GlobalStyle
 
- export const Wrapper = styled.div`
+export const Wrapper = styled.div`
   text-align: center;
 `;
 
