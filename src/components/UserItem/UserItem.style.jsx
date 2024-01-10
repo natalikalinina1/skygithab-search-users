@@ -28,6 +28,15 @@ export const UserTitle = styled.h3`
   line-height: 18px;
   font-size: 26px;
   padding:10px;
+
+  @media (max-width: 768px) {
+    font-size: 22px;
+    padding-top:5px;
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
+    padding-top:5px;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -37,6 +46,10 @@ export const UserInfo = styled.div`
   justify-items: center;
   font-size: 18px;
   padding-bottom: 8px;
+  @media (max-width: 768px) {
+    font-size: 13px;
+    line-height: 13px;
+  }
 `;
 
 export const UserInfoImg = styled.img`
@@ -47,6 +60,12 @@ export const UserInfoImg = styled.img`
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 4;
+  @media (max-width: 768px) {
+    font-size: 22px;
+    width: 70%;
+    height: 60%;
+    padding-top: 10px;
+  }
 `;
 
 export const UserInfoRepo = styled.p`
@@ -76,6 +95,9 @@ export const UserInfoText = styled.div`
   padding: 10px;
   line-height: 18px;
   font-size: 18px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 export const UserInfoCountry = styled.p`
   grid-column: 2;
@@ -99,4 +121,7 @@ export const ErrorWrapper = styled.div`
 export const UserInfoError= styled.p`
   color: red;
   font-size: 14px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
