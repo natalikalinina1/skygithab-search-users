@@ -65,9 +65,9 @@ npm test
 - [x] сортировка: по количеству репозиториев (возрастанию/убыванию):
 ![images](https://raw.githubusercontent.com/natalikalinina1/skygithab-search-users/master/public/assets-githab/main.JPG)
 - [x] пагинация;
-- [x] при клике на элемент открываются подробности (фото, ссылка на профиль, дата регистрации, количество репозиториев, количество подписчиков, страна):
-![images](https://raw.githubusercontent.com/natalikalinina1/skygithab-search-users/master/public/assets-githab/clickmain.JPG)
-- [x] при клике на элемент открываются подробности (фото, ссылка на профиль, дата регистрации, количество репозиториев, количество подписчиков, страна);
+- [x] при клике на элемент открываются подробности (фото, ссылка на профиль, дата регистрации, количество репозиториев, количество подписчиков, страна, если указана):
+![images](https://raw.githubusercontent.com/natalikalinina1/skygithab-search-users/master/public/assets-githab/clickmain.JPG)   
+
 
 - [x] Также в проекте реализовано 3 юнит-теста.
 - [x] Создана обработка ошибок сервера, в случае которых , пользователю отображается соответсвующая страница.
