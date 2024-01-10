@@ -56,8 +56,9 @@ npm test
 **/App**: основной компонент приложения
 
 ## Структура и функционал приложения
-- [x] поиск: по логину;
+- [x] поиск: по логину:
 ![images](https://raw.githubusercontent.com/natalikalinina1/skygithab-search-users/master/public/assets-githab/header.JPG)
+
 Пользователь вводит логин и нажимает кнопку с иконкой лупы для поиска, а по клику на логотип, осуществляется переход на главную GitHab.  
 Настроена валидация ввода:
 ![images](https://raw.githubusercontent.com/natalikalinina1/skygithab-search-users/master/public/assets-githab/searchvalid.JPG)
